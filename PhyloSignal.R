@@ -135,6 +135,7 @@ K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
 #y <- K_model(tree = mbCCfull100, trait = sla, method = "K", test = TRUE, nsim = 9999)
 
 calcAICw <- function(tabla){
+  if ( ! ("geiger" %in% installed.packages())) {install.packages("geiger", dependencies = T)}
   pp <- split(tabla, seq(nrow(tabla)))
   aicValues <- list()
   for(i in 1:100){
