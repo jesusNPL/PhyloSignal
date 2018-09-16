@@ -1,4 +1,10 @@
-# Function to perform test of phylogenetic signal using Pagel's lambda
+# Functions to perform test of phylogenetic signal using Pagel's lambda and Blomberg’s K
+
+# lambdaEval function performs analysis of phylogenetic signal following https://lukejharmon.github.io/ilhabela/instruction/2015/06/02/ContinuousModels/
+# Lambda is a tree transformation that stretches tip branches relative to internal branches, 
+# making the tree more and more like a complete polytomy. If our estimated lambda = 0, 
+# then the traits are inferred to have no phylogenetic signal. Lambda = 1 corresponds to a Brownian motion model; 
+# 0 < lambda < 1 is in between.
 
 lambdaEval <- function(tree, trait){
   library(pbapply)
@@ -24,6 +30,7 @@ lambdaEval <- function(tree, trait){
   nosiglnL <- list()
   nosigAICc <- list()
   nosigK <- list()
+  
   for(i in 1:length(tree)){
     # Lambda
     lambdas[[i]] <- lambdaModel[[i]]$opt$lambda
@@ -63,6 +70,11 @@ lambdaEval <- function(tree, trait){
 
 #x <- lambdaEval(tree = mbCCfull100, trait = sla)
 
+# Lambda is a tree transformation that stretches tip branches relative to internal branches, 
+# making the tree more and more like a complete polytomy. If our estimated lambda = 0, 
+# then the traits are inferred to have no phylogenetic signal. Lambda = 1 corresponds to a Brownian motion model; 
+# 0 < lambda < 1 is in between.
+
 lambda_model <- function(tree, trait, method = "lambda", test = TRUE, nsim = 999){
   lambdaModel <- pblapply(tree, phytools::phylosig, trait, method, test, nsim)
   lambdas <- list()
@@ -85,6 +97,14 @@ lambda_model <- function(tree, trait, method = "lambda", test = TRUE, nsim = 999
   return(results)
 }
 
+#Z <- lambda_model(tree = mbCCfull100, trait = sla, method = "lambda", test = TRUE, nsim = 999)
+
+# Blomberg’s K, compares the variance of PICs to what we would espect under a Brownian motion model. 
+# K = 1 means that relatives resemble one another as much as we should expect under BM; 
+# K < 1 means that there is less “phylogenetic signal” than expected under BM, while K > 1 means that there is more. 
+# A significant p-value returned from phylosignal tells you that there is significant phylogenetic signal - that is, 
+# close relatives are more similar than random pairs of species.
+
 K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
   KModel <- pblapply(tree, phytools::phylosig, trait, method, test, nsim)
   Ks <- list()
@@ -101,7 +121,6 @@ K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
 }
 
 #y <- K_model(tree = mbCCfull100, trait = sla, method = "K", test = TRUE, nsim = 9999)
-#Z <- lambda_model(tree = mbCCfull100, trait = sla, method = "lambda", test = TRUE, nsim = 999)
 
 calcAICw <- function(tabla){
   pp <- split(tabla, seq(nrow(tabla)))
@@ -114,16 +133,8 @@ calcAICw <- function(tabla){
   aicVALS <- do.call(rbind, aicValues)
   aicVALS$Phylo <- rep(Phylo, each = 3)
   aicVALS$Model <- rep(Model, each = 1)
-  names(aicVALS) <- c("AICc", "Delta", "AICw", "Phylogeny", "Model")
+  names(aicVALS) <- c("AICc", "dAICc", "AICcw", "Phylogeny", "Model")
   return(aicVALS)
 }
 
 #llll <- calcAICw(tabla = aicss)
-
-
-
-
-
-
-
-
