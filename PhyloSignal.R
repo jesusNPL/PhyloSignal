@@ -7,15 +7,19 @@
 # 0 < lambda < 1 is in between.
 
 lambdaEval <- function(tree, trait){
-  library(pbapply)
-  lambdaModel <- pblapply(multi2di.multiPhylo(tree, random = TRUE), geiger::fitContinuous, 
+  
+  if ( ! ("pbapply" %in% installed.packages())) {install.packages("pbapply", dependencies = T)}
+  if ( ! ("geiger" %in% installed.packages())) {install.packages("geiger", dependencies = T)}
+  if ( ! ("phytools" %in% installed.packages())) {install.packages("phytools", dependencies = T)}
+  
+  lambdaModel <- pbapply::pblapply(ape::multi2di.multiPhylo(tree, random = TRUE), geiger::fitContinuous, 
                           trait, model = "lambda")
-  bmModel <- pblapply(multi2di.multiPhylo(tree, random = TRUE), geiger::fitContinuous, 
+  bmModel <- pbapply::pblapply(ape::multi2di.multiPhylo(tree, random = TRUE), geiger::fitContinuous, 
                       trait, model = "BM")
-  TreeLambda0 <- pblapply(multi2di.multiPhylo(tree, random = TRUE), rescale, 
+  TreeLambda0 <- pbapply::pblapply(ape::multi2di.multiPhylo(tree, random = TRUE), rescale, 
                           model = "lambda", 0)
   class(TreeLambda0) <- "multiPhylo"
-  nosigModel <- pblapply(TreeLambda0, geiger::fitContinuous, trait, model = "BM")
+  nosigModel <- pbapply::pblapply(TreeLambda0, geiger::fitContinuous, trait, model = "BM")
   
   # lambdas
   lambdas <- list()
@@ -76,7 +80,11 @@ lambdaEval <- function(tree, trait){
 # 0 < lambda < 1 is in between.
 
 lambda_model <- function(tree, trait, method = "lambda", test = TRUE, nsim = 999){
-  lambdaModel <- pblapply(tree, phytools::phylosig, trait, method, test, nsim)
+    
+  if ( ! ("pbapply" %in% installed.packages())) {install.packages("pbapply", dependencies = T)}
+  if ( ! ("phytools" %in% installed.packages())) {install.packages("phytools", dependencies = T)}
+  
+  lambdaModel <- pbapply::pblapply(tree, phytools::phylosig, trait, method, test, nsim)
   lambdas <- list()
   lambdaslogL <- list()
   lambdaslogl0 <- list()
@@ -106,7 +114,11 @@ lambda_model <- function(tree, trait, method = "lambda", test = TRUE, nsim = 999
 # close relatives are more similar than random pairs of species.
 
 K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
-  KModel <- pblapply(tree, phytools::phylosig, trait, method, test, nsim)
+  
+  if ( ! ("pbapply" %in% installed.packages())) {install.packages("pbapply", dependencies = T)}
+  if ( ! ("phytools" %in% installed.packages())) {install.packages("phytools", dependencies = T)}
+  
+  KModel <- pbapply::pblapply(tree, phytools::phylosig, trait, method, test, nsim)
   Ks <- list()
   KPval <- list()
   for(j in 1:length(tree)){
