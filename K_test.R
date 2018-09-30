@@ -12,7 +12,6 @@ K_test <- function(tree, trait, method, test, nsim, number_of_trees, bounds_sim)
 
     Ks <- list()
     KPval <- list()
-    
     KNull <- list()
     KPvalNull <- list()
     
