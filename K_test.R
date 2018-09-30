@@ -30,15 +30,14 @@ K_test <- function(tree, trait, method, test, nsim, number_of_trees, bounds_sim)
     
     kVals <- do.call(rbind, Ks)
     kPvals <- do.call(rbind, KPval)
-    kNullMean <- mean(do.call(rbind, KPvalNULL))
-    kNullSD <- sd(do.call(rbind, KPvalNULL))               
+    kNullMean <- mean(do.call(rbind, KPvalNull))
+    kNullSD <- sd(do.call(rbind, KPvalNull))               
     kPvalNulls <- do.call(rbind, KPvalNull)
-    kSES <- ((kvals - kNullMean)/kNullSD)
+    kSES <- ((kVals - kNullMean)/kNullSD)
     results <- data.frame("Kobs" = kVals, "Pvalobs" = kPvals, "kNullmean" = kNullMean, 
                           "KNullsd" = kNullSD, "PvalNull" = kPvalNulls, "kSES" = kSES)
     return(results)
 }
 
-#K_test(tree = mbCCfull100, trait = sla, method = "K", test = TRUE, 
-#        nsim = 999, number_of_trees = 10, bounds_sim = c(-Inf, Inf))
+#K_test(tree = mbCCfull100, trait = sla, method = "K", test = TRUE, nsim = 999, number_of_trees = 10, bounds_sim = c(-Inf, Inf))
 
