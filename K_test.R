@@ -39,6 +39,6 @@ K_test <- function(tree, trait, method, test, nsim, number_of_trees, bounds_sim)
     return(results)
 }
 
-K_test(tree = mbCCfull100, trait = sla, method = "K", test = TRUE, 
-        nsim = 999, number_of_trees = 10, bounds_sim = c(-Inf, Inf))
+#K_test(tree = mbCCfull100, trait = sla, method = "K", test = TRUE, 
+#        nsim = 999, number_of_trees = 10, bounds_sim = c(-Inf, Inf))
 
