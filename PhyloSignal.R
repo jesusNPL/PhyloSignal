@@ -137,7 +137,7 @@ calcAICw <- function(tabla){
   if ( ! ("geiger" %in% installed.packages())) {install.packages("geiger", dependencies = T)}
   pp <- split(tabla, seq(nrow(tabla)))
   aicValues <- list()
-  for(i in 1:100){
+  for(i in 1:lenght(pp)){
   aicValues[[i]] <- geiger::aicw(as.numeric(pp[[i]]))
   }
   Phylo <-  as.list(paste("Phylo", 1:100, sep = "_"))
