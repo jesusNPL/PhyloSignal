@@ -21,7 +21,7 @@ K_test <- function(tree, trait, method, test, nsim, number_of_trees, bounds_sim)
     Ks[[j]] <- KModel[[j]]$K
     KPval[[j]] <- KModel[[j]]$P
     
-    KNull[[j]] <- apply(phytools::fastBM(tr, n = nsim, sig2 = mean(ape::pic(trait, multi2di(tr))^2), a = mean(trait), bounds = bounds_sim), 
+    KNull[[j]] <- apply(phytools::fastBM(tr, n = nsim, sig2 = mean(ape::pic(trait, ape::multi2di(tr))^2), a = mean(trait), bounds = bounds_sim), 
                         2, phytools::phylosig, tree = tr)
     #KPvalNull[[j]] <- mean(abs(log(c(Ks[[j]], KNull[[j]]))) >= abs(log(Ks[[j]])))
   }
