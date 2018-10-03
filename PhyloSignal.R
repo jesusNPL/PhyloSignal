@@ -16,7 +16,7 @@ lambdaEval <- function(tree, trait){
                           trait, model = "lambda")
   bmModel <- pbapply::pblapply(ape::multi2di.multiPhylo(tree, random = TRUE), geiger::fitContinuous, trait, model = "BM")
   TreeLambda0 <- pbapply::pblapply(ape::multi2di.multiPhylo(tree, random = TRUE), geiger::rescale, 
-                          model = "lambda", 0)
+                          model = "lambda", 0.01)
   class(TreeLambda0) <- "multiPhylo"
   nosigModel <- pbapply::pblapply(TreeLambda0, geiger::fitContinuous, trait)
   
