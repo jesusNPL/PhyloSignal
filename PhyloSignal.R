@@ -127,7 +127,6 @@ K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
     KPval[[j]] <- KModel[[j]]$P
   }
   kVals <- do.call(rbind, Ks)
-  ages <- nodeAges(tree[[1]], min.age = 0)
   ageRoot <- tree[[1]]$root.time
   ageStart <- floor(ageRoot)
   ageEnd <- 0
