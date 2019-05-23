@@ -123,7 +123,7 @@ K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
   KPval <- list()
   for(j in 1:length(tree)){
     Ks[[j]] <- KModel[[j]]$K
-    nSP[[j]] <- length(tree$tip.label)
+    nSP[[j]] <- length(tree[[j]]$tip.label)
     KPval[[j]] <- KModel[[j]]$P
   }
   kVals <- do.call(rbind, Ks)
