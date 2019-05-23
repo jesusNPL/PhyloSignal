@@ -119,15 +119,23 @@ K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
   
   KModel <- pbapply::pblapply(tree, phytools::phylosig, trait, method, test, nsim)
   Ks <- list()
+  nSP <- list()
   KPval <- list()
   for(j in 1:length(tree)){
     Ks[[j]] <- KModel[[j]]$K
+    nSP[[j]] <- tree$tip.label
     KPval[[j]] <- KModel[[j]]$P
   }
   kVals <- do.call(rbind, Ks)
+  ages <- nodeAges(tree[[1]], min.age = 0)
+  ageRoot <- tree[[1]]$root.time
+  ageStart <- floor(ageRoot)
+  ageEnd <- 0
+  timeVals <- rev(seq(ageStart, ageEnd, by = 1))
+  nSPVals <- do.call(rbind, nSP)
   kPvals <- do.call(rbind, KPval)
   
-  results <- data.frame("K" = kVals, "KPval" = kPvals)
+  results <- data.frame("K" = kVals, "KPval" = kPvals, "Time" = TimeVals, "nSPP" = nSPVals)
   return(results)
 }
 
