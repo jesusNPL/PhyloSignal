@@ -130,11 +130,11 @@ K_model <- function(tree, trait, method = "K", test = TRUE, nsim = 999){
   ageRoot <- tree[[1]]$root.time
   ageStart <- floor(ageRoot)
   ageEnd <- 0
-  timeVals <- rev(seq(ageStart, ageEnd, by = 1))
+  timeVals <- rev(seq(ageEnd, ageStart, by = 1))
   nSPVals <- do.call(rbind, nSP)
   kPvals <- do.call(rbind, KPval)
   
-  results <- data.frame("K" = kVals, "KPval" = kPvals, "Time" = TimeVals, "nSPP" = nSPVals)
+  results <- data.frame("nSPP" = nSPVals, "K" = kVals, "KPval" = kPvals, "Time" = timeVals)
   return(results)
 }
 
