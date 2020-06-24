@@ -3,4 +3,4 @@ Functions to perform analyses of phylogenetic signal on a multiPhylo object. Eac
 
 The functions included in the "PhyloSignal.R" file follows the instructions of https://lukejharmon.github.io/ilhabela/instruction/2015/06/02/ContinuousModels/
 
-The function "K_test" follows the framework proposed by Olalla-Tarraga et al. (2017) Journal of Biogeography 44, 99-110.
+The functions "K_test" and "demon_K_test" follows the framework proposed by Olalla-Tarraga et al. (2017) Journal of Biogeography 44, 99-110.
