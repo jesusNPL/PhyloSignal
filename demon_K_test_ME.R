@@ -18,7 +18,6 @@ demon_K_test_ME <- function(tree, trait, method, test, nsim, ME, bounds_sim){
   for(i in 1:length(K_null)) {
     K_null_vec[i] <- K_null[[i]]$K
   }
-  #K_null_vec <- as.numeric(K_null_vec$K)
   K_null_pval <- mean(abs(log(c(K_obs, K_null_vec))) >= abs(log(K_obs)))
   K_null_mean <- mean(K_null_vec)
   K_null_SD <- sd(K_null_vec)
