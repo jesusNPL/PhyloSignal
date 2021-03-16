@@ -20,6 +20,6 @@ demon_K_test <- function(tree, trait, method, test, nsim, bounds_sim){
   K_null_SES <- ((K_obs - mean(K_null))/sd(K_null))
   
   tabla <- data.frame("K_obs" = K_obs, "K_pval" = K_pval, "K_sim_mean" = K_sim_mean, "K_sim_SD" = K_sim_SD, "K_sim_SES" = K_sim_SES, 
-                      "K_null_pval" = K_null_pval, "K_null_mean" = K_null_mean, "K_null_SD" = K_null_SD, "K_null_SES" = K_null_SES)
+                      "K_BM_pval" = K_null_pval, "K_BM_mean" = K_null_mean, "K_BM_SD" = K_null_SD, "K_BM_SES" = K_null_SES)
   return(tabla)
 }
