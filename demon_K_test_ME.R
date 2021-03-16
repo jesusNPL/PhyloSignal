@@ -1,4 +1,4 @@
-demon_K_test <- function(tree, trait, method, test, nsim, se, bounds_sim){
+demon_K_test_ME <- function(tree, trait, method, test, nsim, se, bounds_sim){
   if ( ! ("phytools" %in% installed.packages())) {install.packages("phytools", dependencies = TRUE)}
 
   Ks <- phytools::phylosig(tree, trait, method, test, se, nsim)
