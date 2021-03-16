@@ -12,7 +12,7 @@ demon_K_test_ME <- function(tree, trait, method, test, nsim, se, bounds_sim){
   K_null <- apply(phytools::fastBM(tree, n = nsim, se, 
                                    sig2 = mean(ape::pic(trait, ape::multi2di(tree))^2), 
                                    a = mean(trait), bounds = bounds_sim), 2, 
-                  phytools::phylosig, tree = tree, se = se)
+                  phytools::phylosig, tree = tree)
   
   K_null_pval <- mean(abs(log(c(K_obs, K_null))) >= abs(log(K_obs)))
   K_null_mean <- mean(K_null)
