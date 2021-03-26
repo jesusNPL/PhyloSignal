@@ -14,10 +14,12 @@ demon_K_test_ME <- function(tree, trait, method, test, nsim, ME, bounds_sim){
                                    a = mean(trait), bounds = bounds_sim), 2, 
                   phytools::phylosig, tree = tree, se = ME)
   
-  K_null_vec <- numeric(length = nsim)
+  K_null_vec <- numeric(length = nsim) # Store estimated K values under BM model
+  
   for(i in 1:length(K_null)) {
     K_null_vec[i] <- K_null[[i]]$K
   }
+  
   K_null_pval <- mean(abs(log(c(K_obs, K_null_vec))) >= abs(log(K_obs)))
   K_null_mean <- mean(K_null_vec)
   K_null_SD <- sd(K_null_vec)
