@@ -121,7 +121,7 @@ for(i in 2:ncol(trait_mean)) {
   
 }
 
-# This ARE the final tables with the phylogenetic signal for all traits
+# These ARE the final tables with the phylogenetic signal for all traits
 
 ### Without measurement error
 # raw
